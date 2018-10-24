@@ -97,7 +97,6 @@ function hook(channel, name, message, avatar) {
         })
 }
 
-bot.login('NTAyNTI0MTQ4NzU3NjkyNDI2.DqpLsA.OyDXvvOBbaeIGGoVpUKF6hc8_Cs');
 bot.login(process.env.token);
 
 bot.on('ready', () => {
