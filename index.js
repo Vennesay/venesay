@@ -1,4 +1,4 @@
-﻿const Discord = require('discord.js');
+const Discord = require('discord.js');
 const bot = new Discord.Client();
 const fs = require("fs");
 const Logger = require('./objects/logger');
@@ -957,10 +957,9 @@ bot.on('message', async message => {
                 if (message.member.roles.some(r => [rolename].includes(r.name))) return message.react(`➕`)
                 let nickname = message.member.displayName
                 const embed = new Discord.RichEmbed()
-                .setTitle("`Discord » Проверка на валидность ник нейма.`")
-                .setDescription(`████████████████████████████████████\n█────█────██────██────█────█─███───█\n█─██─█─██──█─██──█─██─█─██─█─███─███\n█────█─██──█─██──█────█─██─█─███───█\n█─██─█─██──█─██──█─█─██─██─█─███─███\n█─██─█────██────██─█─██────█───█───█\n████████████████████████████████████`)
+                .setTitle("`Discord » Запрос на выдачу роли.`")
                 .setColor("#FF0000")
-                .setFooter("© Support Team | ๖ۣۣۜVenesay™")
+                .setFooter("© ๖ۣۣۜVenesay™")
                 .setTimestamp()
                 .addField("Информация", 
                 `\`Пользователь:\` <@${message.author.id}>\n` +
