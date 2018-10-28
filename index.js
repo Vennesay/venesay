@@ -797,7 +797,7 @@ bot.on('message', async message => {
             const adminlvl_my = my_message.content.slice().split('ADMIN PERMISSIONS:** ');
             if (adminlvl[1] >= adminlvl_my[1] && message.member.id != "336207279412215809") return message.reply(`\`вы не можете убрать модера выше или равному вас по уровню.\``)
             find_message.delete()
-            return message.reply(`\`вы сняли модератора \`${adminlvl[1]} уровня\` \` <@${user.id}> \``);
+            return message.reply(`\`вы сняли модератора ${adminlvl[1]} уровня \` <@${user.id}> \``);
         });
     }
 
