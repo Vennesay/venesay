@@ -148,8 +148,7 @@ bot.on('message', async message => {
       if (message.content.startsWith(`/dspanel`)){
         if (message.guild.id != 427906722527707147) return
         if (!message.member.hasPermission("MANAGE_ROLES")) return
-        if (dspanel.has(message.author.id)){
-            dspanel.delete(message.author.id);
+        if (message.channel.name != "admins") return
             message.reply(`\`успешно вышел из системы.\``);
             return message.delete();
         }
