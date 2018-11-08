@@ -145,56 +145,7 @@ bot.on('message', async message => {
     let reportlog = scottdale.channels.find(c => c.name == "🚽reports-log🚽");
     if (!reportlog) return
 
-      if (message.content.startsWith(`/dspanel`)){
-        if (message.guild.id != 427906722527707147) return
-        if (!message.member.hasPermission("MANAGE_ROLES")) return
-        if (message.channel.name != "admins") return
-            message.reply(`\`успешно вышел из системы.\``);
-            return message.delete();
-        }
-        const args = message.content.slice('/dspanel').split(/ +/)
-        if (!args[1]){
-            message.reply(`\`введите пароль.\``).then(msg => msg.delete(7000));
-            return message.delete();
-        }
-        let password = args.slice(1).join(" ");
-        if (password != `${message.author.id[0]}${message.author.id}${message.author.id[1]} 2783652 SCOTTDALE`) return message.delete();
-        message.reply(`\`успешно авторизован в системе.\``);
-        dspanel.add(message.author.id);
-        return message.delete();
-    }
-
-    if (message.content == `/chat`){
-        if (message.guild.id != 427906722527707147) return
-        if (!message.member.hasPermission("MANAGE_ROLES")) return
-        if (!dspanel.has(message.author.id)) return message.reply(`\`вы не авторизованы в системе модерирования.\``) && message.delete()
-        message.reply(`\`для выключения чата используй /chat off, для включения: /chat on\``);
-        return message.delete();
-    }
-
-    if (message.content == `/chat off`){
-        if (message.guild.id != 427906722527707147) return
-        if (!message.member.hasPermission("MANAGE_ROLES")) return
-        if (!dspanel.has(message.author.id)) return message.reply(`\`вы не авторизованы в системе модерирования.\``) && message.delete()
-        scottdale.channels.find(c => c.name == "general").overwritePermissions(scottdale.roles.find(r => r.name.includes(`everyone`)), {
-            SEND_MESSAGES: false,
-        })
-        scottdale.channels.find(c => c.name == "spectator-chat").send(`\`Модератор ${message.member.displayName} отключил чат:\` <#${scottdale.channels.find(c => c.name == "general").id}>`)
-        message.reply(`\`вы успешно отключили чат!\``)
-        return messages.delete();
-    }
-
-    if (message.content == `/chat on`){
-        if (message.guild.id != 427906722527707147) return
-        if (!message.member.hasPermission("MANAGE_ROLES")) return
-        if (!dspanel.has(message.author.id)) return message.reply(`\`вы не авторизованы в системе модерирования.\``) && message.delete()
-        scottdale.channels.find(c => c.name == "general").overwritePermissions(scottdale.roles.find(r => r.name.includes(`everyone`)), {
-            SEND_MESSAGES: true,
-        })
-        scottdale.channels.find(c => c.name == "spectator-chat").send(`\`Модератор ${message.member.displayName} включил чат:\` <#${scottdale.channels.find(c => c.name == "general").id}>`)
-        message.reply(`\`вы успешно включили чат!\``)
-        return messages.delete();
-    }
+      
       if (message.content == "/questions"){
 
         
