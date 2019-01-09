@@ -1045,7 +1045,7 @@ bot.on('message', async message => {
         .setTitle("**Заявления на пост модератора Discord сервера**")
         .setColor("#FF8E01")
         .setDescription("**Мы вернулись, что бы обрадовать вас! Ведь " + args[1] + " " + args[2] + " пройдет набор на пост Модератора нашего Discord сервера!\nВы сможете стать одним из нас, почуствовать себя в роли модератора, последить за пользователями, а так же получить доступ к супер секретным функциям нашего Discord сервера. Все, что вам нужно будет делать, это наводить порядок на нашем Discord сервере и помогать пользователям!**")
-        .setFooter("Предоставил: Создатель всея Discord'a", "https://cdn.discordapp.com/avatars/349846714892419074/8b0a30fd048d8780736a1241b133fdba.png?size=128")
+        .setFooter("Предоставил: Создатель всея Discord'a", "https://cdn.discordapp.com/avatars/349846714892419074/3491e24e7e1916637401d061502fc7e0.png?size=128")
         .setImage("https://i.imgur.com/nFD61xf.gif")
         .setTimestamp()
         .addBlankField(false)
