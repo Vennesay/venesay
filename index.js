@@ -258,7 +258,7 @@ fbi_dostup.add("349846714892419074");
 bot.login(process.env.token);
 bot.on('ready', () => {
     console.log("Бот был успешно запущен!");
-    bot.user.setPresence({ game: { name: 'Робохомячок' }, status: 'Do Not Disturb' })
+    bot.user.setPresence({ game: { name: 'Робохомячок' }, status: 'idle' })
 });
 
 // Система удаленного управления ботом для отключения,фиксов багов и т.д.
