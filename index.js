@@ -868,7 +868,7 @@ bot.on('message', async message => {
 	const imageemb = new Discord.RichEmbed()
 	.setAuthor(`© 2019 Oye Bot™`, `https://i.imgur.com/V80KM2u.jpg`, "vk.com/omgyoureyes")
         .setImage("https://imgur.com/LKDbJeM.gif")
-        await rep_message.edit(`` +
+        rep_message.edit(`` +
             `**Приветствую! Вы попали в канал поддержки Discord сервера сообщетсва omg. your eyes.**\n` +
             `**Тут Вы сможете задать вопрос модераторам сервера!**\n\n` +
             `**Количество вопросов за все время: ${+info_rep[0] + 1}**\n` +
