@@ -865,8 +865,7 @@ bot.on('message', async message => {
         info_rep.push(rep_message.content.split('\n')[4].match(re)[0]);
         info_rep.push(rep_message.content.split('\n')[5].match(re)[0]);
         info_rep.push(rep_message.content.split('\n')[6].match(re)[0]);
-	const imageemb = new Discord.RichEmbed()
-	.setAuthor(`© 2019 Oye Bot™`, `https://i.imgur.com/V80KM2u.jpg`, "vk.com/omgyoureyes")
+	const  imageemb  =  новый  Discord . RichEmbed ()
         .setImage("https://imgur.com/LKDbJeM.gif")
         rep_message.edit(`` +
             `**Приветствую! Вы попали в канал поддержки Discord сервера сообщетсва omg. your eyes.**\n` +
