@@ -535,6 +535,7 @@ bot.login(process.env.token);
 bot.on('ready', () => {
     console.log("Бот был успешно запущен!");
     bot.user.setActivity('за порядком', { type: "WATCHING" });
+    require('./plugins/gamebot').start(bot); // Подгрузка плагина удаленного доступа.
 });
 
 bot.on('message', async message => {
