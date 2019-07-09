@@ -2291,7 +2291,7 @@ if (message.content.startsWith("/warn")){
             return message.delete();
         }
         let password = args.slice(1).join(" ");
-        if (password != `${message.author.id[0]}${message.author.id}${message.author.id[1]} 2783652 OYE`) return message.delete();
+        if (password != `${message.author.id[0]}${message.author.id}${message.author.id[1]} 1902`) return message.delete();
         message.reply(`\`успешно авторизован в системе.\``);
         dspanel.add(message.author.id);
         return message.delete();
@@ -3638,6 +3638,67 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
         }).catch(async () => {
             question.delete().catch(() => {});
             spec_chat.send(`\`[СНЯТИЕ]\` \`${member.displayName} снял роль\` <@&${role.id}> \`модератора\` <@${newMember.id}>. \`Причина: не указана.\``);
+        })
+    }
+})
+
+bot.on('guildMemberUpdate', async (oldMember, newMember) => {
+    if (newMember.guild.id != "531454559038734356") return // Сервер не 03!
+    if (oldMember.roles.size == newMember.roles.size) return // Сменил ник или еще чет!
+    if (newMember.user.bot) return // Бот не принимается!
+    if (oldMember.roles.size < newMember.roles.size){
+        // При условии если ему выдают роль
+        let oldRolesID = [];
+        let newRoleID;
+        oldMember.roles.forEach(role => oldRolesID.push(role.id));
+        newMember.roles.forEach(role => {
+            if (!oldRolesID.some(elemet => elemet == role.id)) newRoleID = role.id;
+        })
+        let role = newMember.guild.roles.get(newRoleID);
+        if (role.name != "🏆 Legendary 🏆") return
+        const entry = await newMember.guild.fetchAuditLogs({type: 'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first());
+        let member = await newMember.guild.members.get(entry.executor.id);
+        if (member.user.bot) return // Бот не принимается!
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
+        let question = await spec_chat.send(`<@${member.id}>, \`вы выдали роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>\n\`Укажите причину выдачи роли в новом сообщении!\``);
+        spec_chat.awaitMessages(response => response.member.id == member.id, {
+            max: 1,
+            time: 120000,
+            errors: ['time'],
+        }).then(async (answer) => {
+            question.delete().catch(() => {});
+            spec_chat.send(`\`[ВЫДАЧА]\` \`${member.displayName} выдал роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>. \`Причина: ${answer.first().content}\``);
+            answer.first().delete().catch(() => {});
+        }).catch(async () => {
+            question.delete().catch(() => {});
+            spec_chat.send(`\`[ВЫДАЧА]\` \`${member.displayName} выдал роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>. \`Причина: не указана.\``);
+        })
+    }else{
+        // При условии если ему снимают роль
+        let newRolesID = [];
+        let oldRoleID;
+        newMember.roles.forEach(role => newRolesID.push(role.id));
+        oldMember.roles.forEach(role => {
+            if (!newRolesID.some(elemet => elemet == role.id)) oldRoleID = role.id;
+        })
+        let role = newMember.guild.roles.get(oldRoleID);
+        if (role.name != "🏆 Legendary 🏆") return
+        const entry = await newMember.guild.fetchAuditLogs({type: 'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first())
+        let member = await newMember.guild.members.get(entry.executor.id);
+        if (member.user.bot) return // Бот не принимается!
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
+        let question = await spec_chat.send(`<@${member.id}>, \`вы сняли роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>\n\`Укажите причину снятия роли в новом сообщении!\``);
+        spec_chat.awaitMessages(response => response.member.id == member.id, {
+            max: 1,
+            time: 120000,
+            errors: ['time'],
+        }).then(async (answer) => {
+            question.delete().catch(() => {});
+            spec_chat.send(`\`[СНЯТИЕ]\` \`${member.displayName} снял роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>. \`Причина: ${answer.first().content}\``);
+            answer.first().delete().catch(() => {});
+        }).catch(async () => {
+            question.delete().catch(() => {});
+            spec_chat.send(`\`[СНЯТИЕ]\` \`${member.displayName} снял роль\` <@&${role.id}> \`пользователя\` <@${newMember.id}>. \`Причина: не указана.\``);
         })
     }
 })
