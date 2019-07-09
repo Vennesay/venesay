@@ -5,8 +5,6 @@ const Logger = require('./objects/logger');
 let point_full = "Discord Point";
 let point_name = "₯";
 
-exports.start = async (bot) => {
-
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max + 1);
