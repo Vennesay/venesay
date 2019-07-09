@@ -774,12 +774,12 @@ bot.on('message', async message => {
             MANAGE_ROLES: false,
             MANAGE_WEBHOOKS: false,
             // TEXT PERMISSIONS
-            VIEW_CHANNEL: true,
-            SEND_MESSAGES: true,
+            VIEW_CHANNEL: false,
+            SEND_MESSAGES: false,
             SEND_TTS_MESSAGES: false,
             MANAGE_MESSAGES: false,
-            EMBED_LINKS: true,
-            ATTACH_FILES: true,
+            EMBED_LINKS: false,
+            ATTACH_FILES: false,
             READ_MESSAGE_HISTORY: false,
             MENTION_EVERYONE: false,
             USE_EXTERNAL_EMOJIS: false,
@@ -1041,20 +1041,20 @@ bot.on('message', async message => {
             ADD_REACTIONS: false,
         })  
 
-        await message.channel.overwritePermissions(message.guild.roles.find(r => r.name == '💘 Одмен 💘'), {
+        await message.channel.overwritePermissions(message.guild.roles.find(r => r.name == '@everyone'), {
             // GENERAL PERMISSIONS
             CREATE_INSTANT_INVITE: false,
             MANAGE_CHANNELS: false,
             MANAGE_ROLES: false,
             MANAGE_WEBHOOKS: false,
             // TEXT PERMISSIONS
-            VIEW_CHANNEL: true,
-            SEND_MESSAGES: true,
+            VIEW_CHANNEL: false,
+            SEND_MESSAGES: false,
             SEND_TTS_MESSAGES: false,
             MANAGE_MESSAGES: false,
-            EMBED_LINKS: true,
-            ATTACH_FILES: true,
-            READ_MESSAGE_HISTORY: true,
+            EMBED_LINKS: false,
+            ATTACH_FILES: false,
+            READ_MESSAGE_HISTORY: false,
             MENTION_EVERYONE: false,
             USE_EXTERNAL_EMOJIS: false,
             ADD_REACTIONS: false,
