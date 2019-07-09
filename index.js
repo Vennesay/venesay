@@ -830,7 +830,6 @@ bot.on('message', async message => {
         }
 
         if (message.content == '/card'){
-            if (!message.member.hasPermission("ADMINISTRATOR")) return
             const embed = new Discord.RichEmbed()
             .setTitle("» Карточка пользователя «")
             .setDescription('**Связь со мной: [vk.com/theisalex](https://vk.com/theisalex)\nDiscord: [.earnshaw ღ#3834](https://discordapp.com/channels/@me/349846714892419074)**')
