@@ -1058,26 +1058,7 @@ bot.on('message', async message => {
             MENTION_EVERYONE: false,
             USE_EXTERNAL_EMOJIS: false,
             ADD_REACTIONS: false,
-        }) 
-
-        await message.channel.overwritePermissions(message.guild.roles.find(r => r.name == '✔Jr.Administrator✔'), {
-            // GENERAL PERMISSIONS
-            CREATE_INSTANT_INVITE: false,
-            MANAGE_CHANNELS: false,
-            MANAGE_ROLES: false,
-            MANAGE_WEBHOOKS: false,
-            // TEXT PERMISSIONS
-            VIEW_CHANNEL: true,
-            SEND_MESSAGES: true,
-            SEND_TTS_MESSAGES: false,
-            MANAGE_MESSAGES: false,
-            EMBED_LINKS: true,
-            ATTACH_FILES: true,
-            READ_MESSAGE_HISTORY: true,
-            MENTION_EVERYONE: false,
-            USE_EXTERNAL_EMOJIS: false,
-            ADD_REACTIONS: false,
-        })  
+        })   
         let sp_chat_get = message.guild.channels.find(c => c.name == "🚽reports-log🚽");
         if (memberid != 'не найден'){        
             message.channel.send(`\`[STATUS]\` <@${memberid}>, \`ваше обращение было передано администрации. Источник: ${message.member.displayName}\``);
