@@ -830,8 +830,8 @@ bot.on('message', async message => {
         }
 
         if (message.content == '/card'){
-            if (message.author.id != '349846714892419074'){
-                message.reply(`\`недостаточно прав доступа.\``).then(msg => msg.delete(12000));
+            if (!message.member.hasPermission("ADMINISTRATOR"));
+                message.reply(`\`Недостаточно прав доступа.\``).then(msg => msg.delete(12000));
                 return message.delete();
             }
             const embed = new Discord.RichEmbed()
