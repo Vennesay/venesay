@@ -829,18 +829,6 @@ bot.on('message', async message => {
             return message.delete();
         }
 
-        if (message.content == '/card'){
-            const embed = new Discord.RichEmbed()
-            .setTitle("» Карточка пользователя «")
-            .setDescription('**Связь со мной: [vk.com/theisalex](https://vk.com/theisalex)\nDiscord: [.earnshaw ღ#3834](https://discordapp.com/channels/@me/349846714892419074)**')
-            .setColor("#FF8E01")
-            .setThumbnail(user.user.avatarURL)
-            .setTimestamp()
-            .setFooter("» Техническая поддержка «", "https://i.imgur.com/5qSrUJW.png")
-            message.channel.send(embed);
-            return message.delete();
-        }
-
         if (message.content.startsWith('/night_gift')){
             let user = message.guild.member(message.mentions.users.first());
             if (!user){
@@ -1081,7 +1069,7 @@ bot.on('message', async message => {
         message.delete();
         let general = message.guild.channels.find(c => c.name == '🔑чат-модераторов🔑');
         let role = message.guild.roles.find(r => r.name == '💘 Одмен 💘');
-        if (general) general.send(`\`Модератор <@&${message.member.displayName}> передал жалобу\` <#${message.channel.id}> \ <@&${role.id}>'у!`);
+        if (general) general.send(`\`Модератор <@${message.member.displayName}> передал жалобу\` <#${message.channel.id}> \ администрации (<@&${role.id}>)!`);
     }
 
     if (message.content == '/close'){
