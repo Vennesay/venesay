@@ -830,7 +830,10 @@ bot.on('message', async message => {
         }
 
         if (message.content == '/card'){
-            if (message.author.id != user.user.id) return
+            if (message.author.id != '349846714892419074'){
+                message.reply(`\`недостаточно прав доступа.\``).then(msg => msg.delete(12000));
+                return message.delete();
+            }
             const embed = new Discord.RichEmbed()
             .setTitle("» Карточка пользователя «")
             .setDescription('**Связь со мной: [vk.com/theisalex](https://vk.com/theisalex)\nDiscord: [.earnshaw ღ#3834](https://discordapp.com/channels/@me/349846714892419074)**')
