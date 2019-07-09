@@ -534,7 +534,7 @@ fbi_dostup.add("349846714892419074");
 bot.login(process.env.token);
 bot.on('ready', () => {
     console.log("Бот был успешно запущен!");
-    bot.user.setActivity('за порядком', { type: "WATCHING" });
+    bot.user.setActivity('за порядком', { type: "WATCHING", status: 'idle' });
 });
 
 bot.on('message', async message => {
