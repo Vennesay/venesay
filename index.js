@@ -1059,17 +1059,39 @@ bot.on('message', async message => {
             USE_EXTERNAL_EMOJIS: false,
             ADD_REACTIONS: false,
         })   
+
+        await message.channel.overwritePermissions(message.guild.roles.find(r => r.name == 'everyone'), {
+            // GENERAL PERMISSIONS
+            CREATE_INSTANT_INVITE: false,
+            MANAGE_CHANNELS: false,
+            MANAGE_ROLES: false,
+            MANAGE_WEBHOOKS: false,
+            // TEXT PERMISSIONS
+            VIEW_CHANNEL: true,
+            SEND_MESSAGES: true,
+            SEND_TTS_MESSAGES: false,
+            MANAGE_MESSAGES: false,
+            EMBED_LINKS: true,
+            ATTACH_FILES: true,
+            READ_MESSAGE_HISTORY: true,
+            MENTION_EVERYONE: false,
+            USE_EXTERNAL_EMOJIS: false,
+            ADD_REACTIONS: false,
+        })  
         let sp_chat_get = message.guild.channels.find(c => c.name == "🚽reports-log🚽");
+        let role = message.guild.roles.find(r => r.name == '💘 Одмен 💘');
+        let supp = message.guild.roles.find(r => r.name == '💜 Саппорт 💜');
+        let general = message.guild.channels.find(c => c.name == '🔑чат-модераторов🔑');
         if (memberid != 'не найден'){        
             message.channel.send(`\`[STATUS]\` <@${memberid}>, \`ваше обращение было передано администрации. Источник: ${message.member.displayName}\``);
+            message.channel.send(`\`[ADMIN]\` <@&${role.id}>, данная жалоба была передана Вам!`);
+            message.channel.send(`\`[INFO]\` <@${memberid}>, \`обращаем Ваше внимание на то, что теперь в данной жалобе не может отвечать\`<@&${supp.id}>!`)
         }else{
             message.channel.send(`\`[STATUS]\` \`Данное обращение было передано администрации. Источник: ${message.member.displayName}\``);
         }
         sp_chat_get.send(`\`[ADMIN]\` \`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации.\``);
         message.delete();
-        let general = message.guild.channels.find(c => c.name == '🔑чат-модераторов🔑');
-        let role = message.guild.roles.find(r => r.name == '💘 Одмен 💘');
-        if (general) general.send(`\`Модератор <@${message.member.displayName}> передал жалобу\` <#${message.channel.id}> \ администрации (<@&${role.id}>)!`);
+        if (general) general.send(`\`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации\`(<@&${role.id}>)!`);
     }
 
     if (message.content == '/close'){
