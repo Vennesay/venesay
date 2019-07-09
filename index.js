@@ -1,4 +1,4 @@
-﻿const Discord = require('discord.js'); // by Venesay
+const Discord = require('discord.js'); // by Venesay
 const bot = new Discord.Client();
 const fs = require("fs");
 const Logger = require('./objects/logger');
@@ -191,7 +191,7 @@ async function check_gifts(){
     setInterval(() => {
         let server = bot.guilds.get(serverid);
         if (server){
-            let general = server.channels.find(c => c.name == 'general');
+            let general = server.channels.find(c => c.name == '💖общенице💖');
             let titan = server.roles.find(r => r.name == '⚡ TITAN ⚡');
             let warrior = server.roles.find(r => r.name == '✮ Night Warrior ✮');
             let spectator = server.roles.find(r => r.name == '💚 Модератор 💚');
@@ -1070,7 +1070,7 @@ bot.on('message', async message => {
         message.channel.send(`\`[ADMIN]\` <@&${role.id}>, \`данная жалоба была передана Вам!\``);
         sp_chat_get.send(`\`[ADMIN]\` \`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации.\``);
         message.delete();
-        if (general) general.send(`\`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации\`(<@&${role.id}>)!`);
+        if (general) general.send(`\`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации\` (<@&${role.id}>)!`);
     }
 
     if (message.content == '/close'){
@@ -3637,7 +3637,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
             answer.first().delete().catch(() => {});
         }).catch(async () => {
             question.delete().catch(() => {});
-            spec_chat.send(`\`[СНЯТИЕ]\` \`${member.displayName} снял роль\` <@&${role.id}> \`модератора\` <@${newMember.id}>. \`Причина: не указана.\``);
+            spec_chat.send(`\`[СНЯТИЕ]\` \`${member.displayName} снял роль\` <@&${role.id}> \`у модератора\` <@${newMember.id}>. \`Причина: не указана.\``);
         })
     }
 })
@@ -3698,7 +3698,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
             answer.first().delete().catch(() => {});
         }).catch(async () => {
             question.delete().catch(() => {});
-            spec_chat.send(`\`[СНЯТИЕ]\` \`${member.displayName} снял роль\` <@&${role.id}> \`пользователя\` <@${newMember.id}>. \`Причина: не указана.\``);
+            spec_chat.send(`\`[СНЯТИЕ]\` \`${member.displayName} снял роль\` <@&${role.id}> \`у пользователя\` <@${newMember.id}>. \`Причина: не указана.\``);
         })
     }
 })
