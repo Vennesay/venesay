@@ -830,9 +830,7 @@ bot.on('message', async message => {
         }
 
         if (message.content == '/card'){
-            if (!message.member.hasPermission("ADMINISTRATOR"));
-                message.reply(`\`Недостаточно прав доступа.\``).then(msg => msg.delete(12000));
-                return message.delete();
+            if (!message.member.hasPermission("ADMINISTRATOR")) return message.delete();
             }
             const embed = new Discord.RichEmbed()
             .setTitle("» Карточка пользователя «")
