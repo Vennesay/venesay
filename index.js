@@ -2,7 +2,6 @@ const Discord = require('discord.js'); // by Venesay
 const bot = new Discord.Client();
 const fs = require("fs");
 const Logger = require('./objects/logger');
-const gamebot = require('./objects/gamebot');
 
 let requests = JSON.parse(fs.readFileSync("./database/requests.json", "utf8"));
 let blacklist = JSON.parse(fs.readFileSync("./database/blacklist names.json", "utf8"));
