@@ -1067,6 +1067,11 @@ bot.on('message', async message => {
         }
         sp_chat_get.send(`\`[ADMIN]\` \`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации.\``);
         message.delete();
+        let general = message.guild.channels.find(c => c.name == '🔑чат-модераторов🔑');
+        let role = message.guild.roles.find(r => r.name == '💘 Одмен 💘');
+        user.addRole(role);
+        message.member.removeRole(role);
+        if (general) general.send(`${user}, \`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \` тебе ==> <@&${role.id}>!`);
     }
 
     if (message.content == '/close'){
