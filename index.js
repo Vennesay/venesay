@@ -774,12 +774,12 @@ bot.on('message', async message => {
             MANAGE_ROLES: false,
             MANAGE_WEBHOOKS: false,
             // TEXT PERMISSIONS
-            VIEW_CHANNEL: false,
-            SEND_MESSAGES: false,
+            VIEW_CHANNEL: true,
+            SEND_MESSAGES: true,
             SEND_TTS_MESSAGES: false,
             MANAGE_MESSAGES: false,
-            EMBED_LINKS: false,
-            ATTACH_FILES: false,
+            EMBED_LINKS: true,
+            ATTACH_FILES: true,
             READ_MESSAGE_HISTORY: false,
             MENTION_EVERYONE: false,
             USE_EXTERNAL_EMOJIS: false,
@@ -1068,7 +1068,7 @@ bot.on('message', async message => {
         }else{
             message.channel.send(`\`[STATUS]\` \`Данное обращение было передано администрации. Источник: ${message.member.displayName}\``);
         }
-        message.channel.send(`\`[ADMIN]\` <@&${role.id}>, данная жалоба была передана Вам!`);
+        message.channel.send(`\`[ADMIN]\` <@&${role.id}>, \`данная жалоба была передана Вам!\``);
         message.channel.send(`\`[INFO]\` <@${memberid}>, \`обращаем Ваше внимание на то, что теперь в данной жалобе не может отвечать\`<@&${supp.id}>!`)
         sp_chat_get.send(`\`[ADMIN]\` \`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации.\``);
         message.delete();
