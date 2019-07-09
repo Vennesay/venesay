@@ -2333,8 +2333,8 @@ if (message.content.startsWith("/warn")){
         message.channel.send(`**<@${message.author.id}>, вот справка по системе семей!**`, {embed: {
             color: 3447003,
             fields: [{
-                name: `Создание, удаление, информация`,
-                value: `**Создать семью:** \`/createfam\`\n**Удалить семью:** \`/deletefam [название]\`\n**Информация о семье:** \`/faminfo [название]\``,
+                name: `Команды для модераторов`,
+                value: `**Создать семью:** \`/createfam\`\n**Удалить семью:** \`/deletefam [название]\``,
             },
             {
                 name: `Управление семьей`,
@@ -2343,8 +2343,102 @@ if (message.content.startsWith("/warn")){
             {
                 name: `Команды для заместителей`,
                 value: `**Пригласить участника:** \`/faminvite [user]\`\n**Исключить участника:** \`/famkick [user]\``,
+            },
+            {
+                name: `Общепользовательские команды`,
+                velue: `**Узнать информацию о семье:** \`/faminfo [name]\`\n**Покинуть семью:** \`/fleave [name]\``,
             }]
         }}).then(msg => msg.delete(35000))
+        return message.delete();
+    }
+
+    if (message.content.startsWith('/fleave')){
+        const args = message.content.slice('/fleave').split(/ +/)
+        if (!args[1]){
+            message.reply(`\`использование: /fleave [название семьи]\``).then(msg => msg.delete(7000));
+            return message.delete();
+        }
+        let familyname = args.slice(1).join(" ");
+        let family_channel = null;
+        let family_role = null;
+        let cmdallow = true;
+        let zam = false;
+        await message.guild.channels.filter(async channel => {
+            if (channel.name == familyname){
+                if (channel.type == "voice"){
+                    if (channel.parent.name.toString() == `💒 Семьи 💒`){
+                        family_channel = channel;
+                        await channel.permissionOverwrites.forEach(async perm => {
+                            if (perm.type == `role`){
+                                let role_fam = message.guild.roles.find(r => r.id == perm.id);
+                                if (role_fam.name == channel.name){
+                                    family_role = role_fam;
+                                }
+                            }
+                            if (perm.type == `member`){
+                                if (perm.allowed.toArray().some(r => r == `CREATE_INSTANT_INVITE`)){
+                                    if(message.author.id == perm.id) cmdallow = false;
+                                }
+                            }
+                            if (perm.type == `member`){
+                                if (!perm.allowed.toArray().some(r => r == `CREATE_INSTANT_INVITE`) && perm.allowed.toArray().some(r => r == `PRIORITY_SPEAKER`)){
+                                    if(message.author.id == perm.id) {
+                                        zam = true;
+                                        perm.delete();
+                                    }
+                                }
+                            }
+                        })
+                    }
+                }
+            }else if(channel.name.includes(familyname)){
+                if (channel.type == "voice"){
+                    if (channel.parent.name.toString() == `💒 Семьи 💒`){
+                        family_channel = channel;
+                        await channel.permissionOverwrites.forEach(async perm => {
+                            if (perm.type == `role`){
+                                let role_fam = message.guild.roles.find(r => r.id == perm.id);
+                                if (role_fam.name == channel.name){
+                                    family_role = role_fam;
+                                }
+                            }
+                            if (perm.type == `member`){
+                                if (perm.allowed.toArray().some(r => r == `CREATE_INSTANT_INVITE`)){
+                                    if(message.author.id == perm.id) cmdallow = false;
+                                }
+                            }
+                            if (perm.type == `member`){
+                                if (!perm.allowed.toArray().some(r => r == `CREATE_INSTANT_INVITE`) && perm.allowed.toArray().some(r => r == `PRIORITY_SPEAKER`)){
+                                    if(message.author.id == perm.id) {
+                                        zam = true;
+                                        perm.delete();
+                                    }
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        });
+        if (family_channel == null || family_role == null){
+            message.channel.send(`\`[ERROR]\` <@${message.author.id}> \`ошибка! Семья: '${familyname}' не найдена!\``).then(msg => msg.delete(10000));
+            return message.delete();
+        }
+        if (!message.member.roles.some(r => r.name == family_role.name) && zam == false) {
+            message.reply(`\`вы не состоите в ${family_role.name}\``).then(msg => msg.delete(10000));
+            return message.delete();
+        }
+        if(cmdallow == false) {
+            message.reply(`\`лидер семьи не может покинуть её\``).then(msg => msg.delete(10000));
+            return message.delete();
+        }
+        if(zam == true) {
+            message.reply(`**\`вы покинули семью ${family_channel.name} и пост заместителя так же был снят\`**`).then(msg => msg.delete(10000));
+            message.member.removeRole(family_role);
+            return message.delete();
+        }
+        message.reply(`**\`вы покинули семью ${family_channel.name}\`**`);
+        message.member.removeRole(family_role);
         return message.delete();
     }
 
