@@ -2329,12 +2329,12 @@ if (message.content.startsWith("/warn")){
         return messages.delete();
     }
     
-        if (message.content.toLowerCase() == '/famhelp'){
+    if (message.content.toLowerCase() == '/famhelp'){
         message.channel.send(`**<@${message.author.id}>, вот справка по системе семей!**`, {embed: {
             color: 3447003,
             fields: [{
-                name: `Команды для модераторов`,
-                value: `**Создать семью:** \`/createfam\`\n**Удалить семью:** \`/deletefam [название]\``,
+                name: `Создание, удаление, информация, покинуть`,
+                value: `**Создать семью:** \`/createfam\`\n**Удалить семью:** \`/deletefam [название]\`\n**Информация о семье:** \`/faminfo [название]\`\n**Покинуть семью: \`/fleave [название семьи]\`**`,
             },
             {
                 name: `Управление семьей`,
@@ -2343,10 +2343,6 @@ if (message.content.startsWith("/warn")){
             {
                 name: `Команды для заместителей`,
                 value: `**Пригласить участника:** \`/faminvite [user]\`\n**Исключить участника:** \`/famkick [user]\``,
-            },
-            {
-                name: `Общепользовательские команды`,
-                velue: `**Узнать информацию о семье:** \`/faminfo [name]\`\n**Покинуть семью:** \`/fleave [name]\``,
             }]
         }}).then(msg => msg.delete(35000))
         return message.delete();
