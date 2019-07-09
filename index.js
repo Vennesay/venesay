@@ -3585,7 +3585,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
             newMember.guild.channels.find(c => c.name == "🔑чат-модераторов🔑").send(`\`[WARNING]\` <@${member.id}> \`подозревается в попытке слива!!! [1/3] Выдача роли\` <@&${role.id}> \`пользователю\` <@${newMember.id}>`)
             return antislivsp1.add(member.id);
         }
-        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-модерок🔬");
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
         let question = await spec_chat.send(`<@${member.id}>, \`вы выдали роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>\n\`Укажите причину выдачи роли в новом сообщении!\``);
         spec_chat.awaitMessages(response => response.member.id == member.id, {
             max: 1,
@@ -3625,7 +3625,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
             newMember.guild.channels.find(c => c.name == "🔑чат-модераторов🔑").send(`\`[WARNING]\` <@${member.id}> \`подозревается в попытке слива!!! [1/3] Снятие роли\` <@&${role.id}> \`пользователю\` <@${newMember.id}>`)
             return antislivsp1.add(member.id);
         }
-        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-модерок🔬");
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
         let question = await spec_chat.send(`<@${member.id}>, \`вы сняли роль\` <@&${role.id}> \`модератору\` <@${newMember.id}>\n\`Укажите причину снятия роли в новом сообщении!\``);
         spec_chat.awaitMessages(response => response.member.id == member.id, {
             max: 1,
