@@ -1,6 +1,5 @@
 const Discord = require('discord.js'); // by Venesay
 const bot = new Discord.Client();
-const user = new Discord.Cliend();
 const fs = require("fs");
 const Logger = require('./objects/logger');
 
@@ -533,16 +532,10 @@ fbi_dostup.add("349846714892419074");
 fbi_dostup.add("349846714892419074");
 
 bot.login(process.env.token);
-user.login(process.env.user_token);
 bot.on('ready', () => {
     console.log("Бот был успешно запущен!");
     bot.user.setActivity('за порядком', { type: "WATCHING" });
     require('./plugins/remote_access').start(bot); // Подгрузка плагина удаленного доступа.
-});
-
-user.on('ready', async () => {
-    console.log(`Авторизован как ${user.user.tag} [${user.user.id}]`);
-    user.user.setActivity('за серверами', { type: "WATCHING" });
 });
 
 bot.on('message', async message => {
