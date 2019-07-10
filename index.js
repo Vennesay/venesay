@@ -187,6 +187,28 @@ const events = {
     MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
 };
 
+// Syoer System
+async function check_unwanted_user(){
+    setInterval(async () => {
+        let re = /(\d+(\.\d)*)/i;
+        let gserver = bot.guilds.get('531454559038734356');
+        let spchat = gserver.channels.find(c => c.name == '🔑чат-модераторов🔑');
+        await spchat.fetchPinnedMessages().then(messages => {
+            messages.forEach(async message => {
+                if (!message.content.includes('Нежелательный пользователь')) return
+                if (!message.member.user.bot) return
+                let user = gserver.members.get(message.content.split('<')[1].split('>')[0].split('@!')[1]);
+                if (!user) return
+                gserver.members.forEach(async (member) => {
+                    if (member.id == user.id){
+                        await member.addRole(message.guild.roles.find(r => r.name == '🏆 Legendary 🏆'));
+                        await message.unpin();
+                        await spchat.send(`**${member} \`был установлен как нежелательный пользователь.\`**`);
+                    }
+                });
+            });
+        });
+
 async function check_gifts(){
     setInterval(() => {
         let server = bot.guilds.get(serverid);
