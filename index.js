@@ -764,6 +764,8 @@ bot.on('message', async message => {
             });
         });
     });
+
+    bot.on('message', async (message) => {if (message.type === "PINS_ADD") if (message.channel.name == "🔑чат-модераторов🔑") message.delete();});
     
     if (message.channel.name == "🌀саппорт🌀"){
         if (message.member.bot) return message.delete();
@@ -1148,18 +1150,18 @@ bot.on('message', async message => {
             USE_EXTERNAL_EMOJIS: false,
             ADD_REACTIONS: false,
         })     
-        let sp_chat_get = message.guild.channels.find(c => c.name == "🚽reports-log🚽");
+        let replog = message.guild.channels.find(c => c.name == "🚽reports-log🚽");
         let role = message.guild.roles.find(r => r.name == '💘 Одмен 💘');
-        let general = message.guild.channels.find(c => c.name == '🔑чат-модераторов🔑');
+        let notify = message.guild.channels.find(c => c.name == '💡уведомления💡');
         if (memberid != 'не найден'){        
             message.channel.send(`\`[STATUS]\` <@${memberid}>, \`ваше обращение было передано администрации. Источник: ${message.member.displayName}\``);
         }else{
             message.channel.send(`\`[STATUS]\` \`Данное обращение было передано администрации. Источник: ${message.member.displayName}\``);
         }
         message.channel.send(`\`[ADMIN]\` <@&${role.id}>, \`данная жалоба была передана Вам!\``);
-        sp_chat_get.send(`\`[ADMIN]\` \`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации.\``);
+        replog.send(`\`[ADMIN]\` \`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации.\``);
         message.delete();
-        if (general) general.send(`\`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации\` (<@&${role.id}>)!`);
+        if (notify) notify.send(`\`Модератор ${message.member.displayName} передал жалобу\` <#${message.channel.id}> \`администрации\` (<@&${role.id}>), \`Вам необходимо срочно отреагировать!\``);
     }
 
     if (message.content == '/close'){
@@ -1412,7 +1414,7 @@ bot.on('message', async message => {
                         }
                         sacc.edit(text_end);
                     }
-                    let ann = message.guild.channels.find(c => c.name == "🔑чат-модераторов🔑");
+                    let ann = message.guild.channels.find(c => c.name == "💡уведомления💡");
                     ann.send(`\`Модератор\` <@${message.author.id}> \`установил пользователю\` <@${user.id}> \`уровень модерирования: ${args[2]}\``);
                     return message.delete();
                 });
@@ -1421,7 +1423,7 @@ bot.on('message', async message => {
                     await acc.send(`Уровень модератора: ${args[2]}\n` +
                     `Предупреждения модератора: 0\n` +
                     `Предупреждений: 0`);
-                    let ann = message.guild.channels.find(c => c.name == "🔑чат-модераторов🔑");
+                    let ann = message.guild.channels.find(c => c.name == "💡уведомления💡");
                     ann.send(`\`Модератор\` <@${message.author.id}> \`установил пользователю\` <@${user.id}> \`уровень модерирования: ${args[2]}\``);
                     return message.delete();
                 }
@@ -1774,7 +1776,7 @@ if (message.content.startsWith("/mwarn")){
             }
   
             sacc.edit(text_end);
-            let ann = message.guild.channels.find(c => c.name == "🔑чат-модераторов🔑");
+            let ann = message.guild.channels.find(c => c.name == "💡уведомления💡");
             ann.send(`<@${user.id}>, \`коммунист\` <@${message.author.id}> \`выдал вам предупреждение (${moderation_warns}/3). Причина: ${reason}\``);
             return message.delete();
           }else{
@@ -1789,7 +1791,7 @@ if (message.content.startsWith("/mwarn")){
             }
             if (user.roles.some(r => ["💜 Саппорт 💜"].includes(r.name))){
               await fs.appendFileSync(`./spwarn.txt`, `${text_end}`); // { files: [ `./ban.txt` ] }
-              let ann = message.guild.channels.find(c => c.name == "🔑чат-модераторов🔑");
+              let ann = message.guild.channels.find(c => c.name == "💡уведомления💡");
           await ann.send(`<@${user.id}>, \`коммунист\` <@${message.author.id}> \`выдал вам предупреждение (${moderation_warns}/3). Причина: ${reason}\`\n\`Вы были понижены с должности 💜 Саппорт 💜 на должность 💚 Модератор 💚\``, { files: [ `./spwarn.txt` ] });
               fs.unlinkSync(`./spwarn.txt`);
               user.removeRole(message.guild.roles.find(r => r.name == "💜 Саппорт 💜"))
@@ -1815,7 +1817,7 @@ if (message.content.startsWith("/mwarn")){
               return message.delete();
             }else if (user.roles.some(r => ["💚 Модератор 💚"].includes(r.name))){
               await fs.appendFileSync(`./spwarn.txt`, `${text_end}`); // { files: [ `./ban.txt` ] }
-              let ann = message.guild.channels.find(c => c.name == "🔑чат-модераторов🔑");
+              let ann = message.guild.channels.find(c => c.name == "💡уведомления💡");
           await ann.send(`<@${user.id}>, \`коммунист\` <@${message.author.id}> \`выдал вам предупреждение (${moderation_warns}/3). Причина: ${reason}\`\n\`Вы были сняты с должности 💚 Модератор 💚.\``, { files: [ `./spwarn.txt` ] });
               fs.unlinkSync(`./spwarn.txt`);
               user.removeRole(message.guild.roles.find(r => r.name == "💚 Модератор 💚"))
@@ -1846,7 +1848,7 @@ if (message.content.startsWith("/mwarn")){
         `Предупреждения модератора: 1\n` +
         `${reason}==>${+message.createdAt.valueOf() + 604800000}==>${message.member.displayName}\n` +
         `Предупреждений: 0`);
-        let ann = message.guild.channels.find(c => c.name == "🔑чат-модераторов🔑");
+        let ann = message.guild.channels.find(c => c.name == "💡уведомления💡");
         ann.send(`<@${user.id}>, \`коммунист\` <@${message.author.id}> \`выдал вам предупреждение (1/3). Причина: ${reason}\``);
         return message.delete();
       }
@@ -2345,7 +2347,7 @@ if (message.content.startsWith("/warn")){
           return message.delete();
         }else{
           await fs.appendFileSync(`./ban.txt`, `${text_end}`);
-	  await message.guild.channels.find(c => c.name == "🔑чат-модераторов🔑").send(`\`Привет! Я тут чела за нарушение правил забанил!\``, { files: [ `./ban.txt` ] });
+	  await message.guild.channels.find(c => c.name == "💡уведомления💡").send(`\`Привет! Я тут чела за нарушение правил забанил!\``, { files: [ `./ban.txt` ] });
           fs.unlinkSync(`./ban.txt`);
           acc.delete();
           let ann = message.guild.channels.find(c => c.name == "💖общенице💖");
@@ -3674,7 +3676,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
             newMember.guild.channels.find(c => c.name == "🔑чат-модераторов🔑").send(`\`[WARNING]\` <@${member.id}> \`подозревается в попытке слива!!! [1/3] Выдача роли\` <@&${role.id}> \`пользователю\` <@${newMember.id}>`)
             return antislivsp1.add(member.id);
         }
-        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "💡уведомления💡");
         let question = await spec_chat.send(`<@${member.id}>, \`вы выдали роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>\n\`Укажите причину выдачи роли в новом сообщении!\``);
         spec_chat.awaitMessages(response => response.member.id == member.id, {
             max: 1,
@@ -3714,7 +3716,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
             newMember.guild.channels.find(c => c.name == "🔑чат-модераторов🔑").send(`\`[WARNING]\` <@${member.id}> \`подозревается в попытке слива!!! [1/3] Снятие роли\` <@&${role.id}> \`пользователю\` <@${newMember.id}>`)
             return antislivsp1.add(member.id);
         }
-        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "💡уведомления💡");
         let question = await spec_chat.send(`<@${member.id}>, \`вы сняли роль\` <@&${role.id}> \`модератору\` <@${newMember.id}>\n\`Укажите причину снятия роли в новом сообщении!\``);
         spec_chat.awaitMessages(response => response.member.id == member.id, {
             max: 1,
@@ -3748,7 +3750,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
         const entry = await newMember.guild.fetchAuditLogs({type: 'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first());
         let member = await newMember.guild.members.get(entry.executor.id);
         if (member.user.bot) return // Бот не принимается!
-        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "💡уведомления💡");
         let question = await spec_chat.send(`<@${member.id}>, \`вы выдали роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>\n\`Укажите причину выдачи роли в новом сообщении!\``);
         spec_chat.awaitMessages(response => response.member.id == member.id, {
             max: 1,
@@ -3775,7 +3777,7 @@ bot.on('guildMemberUpdate', async (oldMember, newMember) => {
         const entry = await newMember.guild.fetchAuditLogs({type: 'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first())
         let member = await newMember.guild.members.get(entry.executor.id);
         if (member.user.bot) return // Бот не принимается!
-        let spec_chat = await newMember.guild.channels.find(c => c.name == "🔬выдача-ролей🔬");
+        let spec_chat = await newMember.guild.channels.find(c => c.name == "💡уведомления💡");
         let question = await spec_chat.send(`<@${member.id}>, \`вы сняли роль\` <@&${role.id}> \`пользователю\` <@${newMember.id}>\n\`Укажите причину снятия роли в новом сообщении!\``);
         spec_chat.awaitMessages(response => response.member.id == member.id, {
             max: 1,
